@@ -23,11 +23,13 @@ public class InertialSensorManager {
     private static final int ACCELEROMETER_SAMPLING = SensorManager.SENSOR_DELAY_FASTEST;
     private static final int MAGNETIC_SAMPLING = SensorManager.SENSOR_DELAY_FASTEST;
     private static final int GYROSCOPE_SAMPLING = SensorManager.SENSOR_DELAY_FASTEST;
+    private static final int STEP_SAMPLING = SensorManager.SENSOR_DELAY_FASTEST;
 
     public enum SensorEnum {
         ACCELEROMETER(0, Sensor.TYPE_ACCELEROMETER, "accelerometer", ACCELEROMETER_SAMPLING),
         MAGNETOMETER(1, Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED, "magnetometer", MAGNETIC_SAMPLING),
-        GYROSCOPE(2, Sensor.TYPE_GYROSCOPE_UNCALIBRATED, "gyroscope", GYROSCOPE_SAMPLING);
+        GYROSCOPE(2, Sensor.TYPE_GYROSCOPE_UNCALIBRATED, "gyroscope", GYROSCOPE_SAMPLING),
+        STEP_DETECTOR(3, Sensor.TYPE_STEP_DETECTOR, "step_detector", STEP_SAMPLING);
 
         private final int order;
         private final int type;
@@ -102,7 +104,18 @@ public class InertialSensorManager {
         this.sampleSensor(SensorEnum.GYROSCOPE, sensorDataCallback, aggregate, interval);
     }
 
+    /** For the Step Detector sensor **/
 
+    public void startStepDetectorStream(OnSensorDataCallback sensorDataCallback) {
+        this.startSensorStream(SensorEnum.STEP_DETECTOR, sensorDataCallback);
+    }
+    public void stopStepDetectorStream() {
+        this.stopSensorStream(SensorEnum.STEP_DETECTOR);
+    }
+    public void sampleStepDetector (OnSensorDataCallback sensorDataCallback,
+                                 boolean aggregate, long interval) {
+        this.sampleSensor(SensorEnum.STEP_DETECTOR, sensorDataCallback, aggregate, interval);
+    }
 //    /** For all the sensors at once **/
 //
 //    public void startAllSensorsStream(OnSensorDataCallback sensorDataCallback) {

@@ -85,6 +85,7 @@ public class InteractiveMapActivity extends FragmentActivity
     private static boolean sensingMagn = true;
     private static boolean sensingGyro = true;
     private static boolean sensingWifi = true;
+    private static boolean sensingSteps = true;
 
     private boolean isLoggingLocationInput   = false;
     private boolean isLoggingSensorsOnInput     = false;
@@ -728,6 +729,8 @@ public class InteractiveMapActivity extends FragmentActivity
                 usm.sampleGyroscope(this, aggregateSensorSample, SAMPLE_INTERVAL);
             if (sensingWifi)
                 new WiFiScanner(this, false, this);
+            if (sensingSteps)
+                usm.sampleStepDetector(this, aggregateSensorSample, SAMPLE_INTERVAL);
         }
 
         drawPoint(new LatLng(lat, lng), timestamp);
