@@ -80,13 +80,7 @@ public class Logger {
             String filename = timestamp.toString();
             filename = prefix + "_" + filename.substring(0, filename.length() - 4).replaceAll(":", "-").replaceAll(" ", "_") + ".JSON";
 
-            File documentsDirectory = Environment.getExternalStorageDirectory();
-            File outputDirectory = new File(documentsDirectory, LOGS_FOLDER);
-
-            if (!outputDirectory.mkdirs()) {
-                Log.e("directory", "Directory not created");
-            }
-            File file = new File(outputDirectory, filename);
+            File file = new File(context.getExternalFilesDir(LOGS_FOLDER), filename);
 
             FileWriter fw = null;
             try {
